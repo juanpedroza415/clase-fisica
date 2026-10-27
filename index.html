@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador y Solucionador de Movimiento Parabólico</title>
+
+    <!-- Hojas de Estilo KaTeX (Para visualizar ecuaciones matemáticas) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Hoja de Estilos Personalizada -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Simulador y Solucionador de Física Mecánica</h1>
+        <p>Movimiento Parabólico y Tiro Horizontal — Solución Paso a Paso</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- SECCIÓN DE ACCESO RÁPIDO Y CONFIGURACIÓN -->
+        <section class="card shadow">
+            <h2>1. Accesos Rápidos del Taller</h2>
+            <p>Selecciona un ejercicio del taller para resolverlo automáticamente con despejes explícitos:</p>
+            
+            <div class="preset-buttons">
+                <button class="btn btn-preset" onclick="loadExercise(1)">Ejercicio 1 (Lanzamiento 20 m/s @ 30°)</button>
+                <button class="btn btn-preset" onclick="loadExercise(2)">Ejercicio 2 (Ángulo 53° y t_subida = 2s)</button>
+                <button class="btn btn-preset" onclick="loadExercise(3)">Ejercicio 3 (Avión a 90 m/s desde 1000m)</button>
+                <button class="btn btn-preset" onclick="loadExercise(4)">Ejercicio 4 (Peña 100m, v = 36 km/h)</button>
+                <button class="btn btn-preset" onclick="loadExercise(5)">Ejercicio 5 (Terraza 5m, x=3m en t=0.25s)</button>
+            </div>
+
+            <div class="gravity-selector">
+                <label for="gravity-select"><strong>Valor de Gravedad ($g$):</strong></label>
+                <select id="gravity-select" onchange="updateCalculation()">
+                    <option value="9.8">g = 9.8 m/s² (Estándar universitario)</option>
+                    <option value="10.0">g = 10.0 m/s² (Aproximación de examen)</option>
+                    <option value="9.81">g = 9.81 m/s² (Preciso)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- MODOS DE CALCULADORA SEGÚN TIPO DE DATOS -->
+        <section class="card shadow">
+            <h2>2. Modo de Entrada de Datos</h2>
+            <p>Escoge según los datos que conoces o el valor que necesitas encontrar:</p>
+
+            <div class="mode-tabs">
+                <button class="tab-btn active" onclick="setMode('A')">Modo A: Con $v_0$, $\theta$ y $h_0$</button>
+                <button class="tab-btn" onclick="setMode('B')">Modo B: Con $\theta$ y $t_{\text{subida}}$</button>
+                <button class="tab-btn" onclick="setMode('C')">Modo C: Tiro Horizontal ($v_{0x}$ en m/s o km/h y $h_0$)</button>
+                <button class="tab-btn" onclick="setMode('D')">Modo D: Con Punto $(x_1, t_1)$ y Altura $h_0$</button>
+            </div>
+
+            <div id="input-fields" class="input-grid">
+                <!-- Se llena dinámicamente mediante JavaScript -->
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="calculateCustom()">Calcular y Simular</button>
+            </div>
+        </section>
+
+        <!-- VISUALIZADOR Y ANIMACIÓN CANVAS -->
+        <section class="card shadow">
+            <div class="canvas-header">
+                <h2>3. Trayectoria y Animación en Tiempo Real</h2>
+                <div class="canvas-controls">
+                    <button class="btn btn-small" onclick="toggleAnimation()">Play / Pausa</button>
+                    <button class="btn btn-small" onclick="resetAnimation()">Reiniciar</button>
+                </div>
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="simCanvas" width="800" height="400"></canvas>
+            </div>
+        </section>
+
+        <!-- RESULTADOS Y PASO A PASO DETALLADO -->
+        <section class="card shadow">
+            <h2>4. Solución Detallada y Despejes Matemáticos</h2>
+            
+            <div id="results-summary" class="summary-grid">
+                <!-- Tarjetas resumidas de resultados -->
+            </div>
+
+            <div id="step-by-step" class="math-steps">
+                <!-- Procedimiento detallado escrito con KaTeX -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Simulador de Física Mecánica — Universidad | Movimiento en 2 Dimensiones</p>
+    </footer>
+
+    <!-- Script Principal -->
+    <script src="script.js"></script>
+</body>
+</html>
